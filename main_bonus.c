@@ -1,4 +1,4 @@
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 #include <stdio.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -12,8 +12,8 @@ int	main(int ac, char **av)
 
 	if (ac == 1)
 	{
-		fd = STDIN_FILENO;
-	//	fd = open("/dev/random", O_RDONLY);
+	//	fd = STDIN_FILENO;
+		fd = open("/dev/random", O_RDONLY);
 		while (get_next_line(fd, &line) == 1)
 		{
 			printf("%s\n", line);

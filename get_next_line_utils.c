@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aldubar <aldubar@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/24 21:39:09 by aldubar           #+#    #+#             */
+/*   Updated: 2020/11/24 21:47:50 by aldubar          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
-static size_t	ft_strlen(const char *s)
+size_t	ft_strlen(const char *s)
 {
 	size_t	i;
 
@@ -16,7 +28,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	size_t	i;
 	size_t	j;
 
-	join = (char *)malloc(sizeof(char) * (ft_strlen((char *)s1) + ft_strlen((char *)s2) + 1));
+	join = (char *)malloc(sizeof(char) * (ft_strlen((char *)s1) +
+				ft_strlen((char *)s2) + 1));
 	if (!join)
 		return (NULL);
 	i = 0;
@@ -38,9 +51,9 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 char	*ft_strdup(const char *s)
 {
-	int	i;
+	int		i;
 	char	*dest;
-	int	size;
+	int		size;
 
 	i = 0;
 	size = 0;
@@ -72,10 +85,9 @@ char	*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr_light(char const *s, unsigned int start, size_t len)
 {
 	unsigned	int	i;
-	unsigned	int	size;
 	char			*str;
 
 	if (!s)
@@ -89,14 +101,10 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		str[0] = '\0';
 		return (str);
 	}
-	if (start + len > ft_strlen(s))
-		size = ft_strlen(s) - start;
-	else
-		size = len;
-	str = (char *)malloc(sizeof(char) * (size + 1));
+	str = (char *)malloc(sizeof(char) * (len + 1));
 	if (!str)
 		return (NULL);
-	while (i < size)
+	while (i < len)
 	{
 		str[i] = s[start + i];
 		i++;
