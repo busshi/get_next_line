@@ -6,7 +6,7 @@
 #    By: aldubar <aldubar@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/26 10:25:36 by aldubar           #+#    #+#              #
-#    Updated: 2020/11/26 15:03:23 by aldubar          ###   ########.fr        #
+#    Updated: 2020/11/27 16:41:35 by aldubar          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,9 +16,9 @@ BONUS_NAME	=	bonus.out
 
 MULTI_FD_NAME	=	multi_fd.out
 
-SRCS		=	get_next_line.c \
+SRCS		=	main.c \
+			get_next_line.c \
 			get_next_line_utils.c \
-			main.c
 
 BONUS_SRCS	=	get_next_line_bonus.c \
 			get_next_line_utils_bonus.c \

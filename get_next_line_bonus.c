@@ -6,19 +6,17 @@
 /*   By: aldubar <aldubar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 21:29:59 by aldubar           #+#    #+#             */
-/*   Updated: 2020/11/26 00:01:33 by aldubar          ###   ########.fr       */
+/*   Updated: 2020/11/28 16:19:21 by aldubar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-static int		get_line(int readed, t_list *join, char **line)
+static int		get_line(t_list *join, char **line)
 {
 	size_t	i;
 	char	*tmp;
 
-	if (readed < 0)
-		return (-1);
 	if (!join)
 	{
 		*line = ft_strdup("");
@@ -41,7 +39,7 @@ static int		get_line(int readed, t_list *join, char **line)
 	}
 }
 
-static int		ft_check(int fd, char **buf)
+/*static int		ft_check(int fd, char **buf)
 {
 	*buf = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!*buf)
@@ -52,7 +50,7 @@ static int		ft_check(int fd, char **buf)
 		return (0);
 	}
 	return (1);
-}
+}*/
 
 static t_list	*ft_lstnew(void *content, int file)
 {
@@ -89,12 +87,13 @@ static t_list	*get_fd(int fd, t_list **lst)
 
 int				get_next_line(int fd, char **line)
 {
-	char			*buf;
+//	char			*buf;
+	char			buf[BUFFER_SIZE + 1];
 	int				readed;
 	static t_list	*files;
 	t_list			*tmp;
 
-	if (!line || fd < 0 || BUFFER_SIZE < 1 || !ft_check(fd, &buf))
+	if (!line || fd < 0 || BUFFER_SIZE < 1 || read(fd, buf, 0) < 0)//!ft_check(fd, &buf))
 		return (-1);
 	readed = 1;
 	tmp = get_fd(fd, &files);
@@ -109,6 +108,8 @@ int				get_next_line(int fd, char **line)
 		if (ft_strchr(tmp->content, '\n'))
 			break ;
 	}
-	free(buf);
-	return (get_line(readed, tmp, line));
+	//free(buf);
+	if (readed < 0)
+		return (-1);
+	return (get_line(tmp, line));
 }

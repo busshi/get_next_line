@@ -9,16 +9,18 @@ int	main(int ac, char **av)
 	int	fd;
 	char	*line;
 	size_t	i;
+	int	res;
 
 	if (ac == 1)
 	{
-	//	fd = STDIN_FILENO;
-		fd = open("/dev/random", O_RDONLY);
-		while (get_next_line(fd, &line) == 1)
+		fd = STDIN_FILENO;
+//		fd = open("/dev/random", O_RDONLY);
+		while ((res = get_next_line(fd, &line)) == 1)
 		{
-			printf("%s\n", line);
+			printf("[ %d ] %s\n", res, line);
 			free(line);
 		}
+		printf("[ %d ] %s\n", res, line);
 		free(line);
 	}
 	else
@@ -27,11 +29,12 @@ int	main(int ac, char **av)
 		while (av[i])
 		{
 			fd = open(av[i], O_RDONLY);
-			while (get_next_line(fd, &line) == 1)
+			while ((res = get_next_line(fd, &line) == 1))
 			{
-				printf("%s\n", line);
+				printf("[ %d ] %s\n", res, line);
 				free(line);
 			}
+			printf("[ %d ] %s\n", res, line);
 			free(line);
 			close(fd);
 			i++;
