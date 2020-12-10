@@ -6,7 +6,7 @@
 /*   By: aldubar <aldubar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 21:42:19 by aldubar           #+#    #+#             */
-/*   Updated: 2020/11/28 10:55:10 by aldubar          ###   ########.fr       */
+/*   Updated: 2020/12/10 19:07:42 by aldubar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,8 @@ char	*ft_strchr(const char *s, int c);
 char	*ft_substr_light(char const *s, unsigned int start, size_t len);
 size_t	ft_strlen(const char *s);
 
+#endif
+
+#ifndef BUFFER_SIZE
+# define BUFFER_SIZE	1024
 #endif
