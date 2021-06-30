@@ -39,7 +39,7 @@ static int		get_line(t_list *join, char **line)
 	}
 }
 
-/*static int		ft_check(int fd, char **buf)
+static int		ft_check(int fd, char **buf)
 {
 	*buf = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!*buf)
@@ -50,7 +50,7 @@ static int		get_line(t_list *join, char **line)
 		return (0);
 	}
 	return (1);
-}*/
+}
 
 static t_list	*ft_lstnew(void *content, int file)
 {
@@ -87,13 +87,12 @@ static t_list	*get_fd(int fd, t_list **lst)
 
 int				get_next_line(int fd, char **line)
 {
-//	char			*buf;
-	char			buf[BUFFER_SIZE + 1];
+	char			*buf;
 	int				readed;
 	static t_list	*files;
 	t_list			*tmp;
 
-	if (!line || fd < 0 || BUFFER_SIZE < 1 || read(fd, buf, 0) < 0)//!ft_check(fd, &buf))
+	if (!line || fd < 0 || BUFFER_SIZE < 1 || !ft_check(fd, &buf))
 		return (-1);
 	readed = 1;
 	tmp = get_fd(fd, &files);
@@ -108,8 +107,6 @@ int				get_next_line(int fd, char **line)
 		if (ft_strchr(tmp->content, '\n'))
 			break ;
 	}
-	//free(buf);
-	if (readed < 0)
-		return (-1);
+	free(buf);
 	return (get_line(tmp, line));
 }
